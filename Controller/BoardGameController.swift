@@ -16,10 +16,11 @@ class BoardGameController: UIViewController {
     override func loadView() {
         
         super.loadView()
-        view.addSubview(startButtonView)
+//        view.addSubview(startButtonView)
         view.addSubview(startBoardGameView)
-        view.addSubview(getEndButtonView())
+//        view.addSubview(getEndButtonView())
         startGame(startButtonView)
+        view.backgroundColor = .systemPink
     }
     var cardsPairsCounts = 8
     

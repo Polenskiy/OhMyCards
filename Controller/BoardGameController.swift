@@ -16,27 +16,17 @@ class BoardGameController: UIViewController {
     override func loadView() {
         
         super.loadView()
-//        view.addSubview(startButtonView)
         view.addSubview(startBoardGameView)
-//        view.addSubview(getEndButtonView())
-        startGame(startButtonView)
-        view.backgroundColor = .systemPink
+        startGame()
+        view.backgroundColor = UIColor(named: "View")
+        setupNavigationBar()
+        configureRestartGameButton()
     }
     var cardsPairsCounts = 8
     
     lazy var game: Game = getNewGame()
-    lazy var startButtonView = getStartButtonView()
     lazy var startBoardGameView = getBoardGameView()
     
-    @objc func startGame(_ sender: UIButton) {
-        game = getNewGame()
-        let cards = getCardBy(modelData: game.cards)
-        placeCardsOnBoard(cards)
-        
-    }
-    @objc func goBackToTheStartScreen(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-    }
     
     private func getBoardGameView() -> UIView {
         
@@ -47,54 +37,67 @@ class BoardGameController: UIViewController {
         boardView.frame.origin.x = margin
         let window = UIApplication.shared.windows[0]
         let topPadding = window.safeAreaInsets.top
-        boardView.frame.origin.y = topPadding + startButtonView.frame.height + margin
+        boardView.frame.origin.y = topPadding + margin + 40
         
         boardView.frame.size.width = UIScreen.main.bounds.width - margin*2
         let bottomPadding = window.safeAreaInsets.bottom
         boardView.frame.size.height = UIScreen.main.bounds.height - boardView.frame.origin.y - margin - bottomPadding
         
         boardView.layer.cornerRadius = 5
-        boardView.layer.backgroundColor = UIColor(red: 0.6, green: 0.1, blue: 0.4, alpha: 0.5).cgColor
+        boardView.layer.backgroundColor = UIColor(named: "PinkBoard")?.cgColor
 
         
         return boardView
     }
     
-    private func getStartButtonView() -> UIButton {
-        
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-        button.center.x = view.center.x
-        
-        button.setTitle("Start game", for: .normal)
-        button.setTitleColor(.purple, for: .normal)
-        button.setTitleColor(.yellow, for: .highlighted)
-        button.backgroundColor = .systemPink
+    
+    private lazy var backGame = {
+        let button = UIButton()
+        button.setTitle("Back", for: .normal)
+        button.backgroundColor = UIColor(named: "YellowButton")
+        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.systemYellow, for: .highlighted)
         button.layer.cornerRadius = 10
-        
-        let window = UIApplication.shared.windows[0]
-        let topPadding = window.safeAreaInsets.top
-        button.frame.origin.y = topPadding
-        
-        //подключаем обработчик нажатия на кнопку
-        button.addTarget(nil, action: #selector(startGame(_:)), for: .touchUpInside)
-        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(endGame), for: .touchUpInside)
         return button
+        
+    }()
+    
+    
+    private lazy var restartGame = {
+        
+        let button = UIButton()
+        button.setTitle("Restart", for: .normal)
+        button.backgroundColor = UIColor(named: "YellowButton")
+        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.systemYellow, for: .highlighted)
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(startGame), for: .touchUpInside)
+        return button
+    }()
+    
+    
+    @objc private func startGame() {
+        game = getNewGame()
+        let cards = getCardBy(modelData: game.cards)
+        placeCardsOnBoard(cards)
+        
     }
     
-    private func getEndButtonView() -> UIButton {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        button.setTitle("Go back", for: .normal)
-        button.setTitleColor(.purple, for: .normal)
-        button.setTitleColor(.yellow, for: .highlighted)
-        
-        let window = UIApplication.shared.windows[0]
-        let topPadding = window.safeAreaInsets.top
-        button.frame.origin.y = topPadding
-        
-        button.addTarget(nil, action: #selector(goBackToTheStartScreen(_:)), for: .touchUpInside)
-        
-        return button
+    @objc private func endGame() {
+        navigationController?.popViewController(animated: true)
     }
+    
+    private func setupNavigationBar() {
+        let restartButton = UIBarButtonItem(customView: restartGame)
+        let backButton = UIBarButtonItem(customView: backGame)
+        navigationItem.rightBarButtonItem = restartButton
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    
     
    private func getNewGame() -> Game {
         
@@ -210,5 +213,18 @@ class BoardGameController: UIViewController {
             card.frame.origin = CGPoint(x: randomXCoordinate, y: randomYCoordinate)
             startBoardGameView.addSubview(card)
         }
+    }
+}
+
+private extension BoardGameController {
+    
+    func configureRestartGameButton() {
+        
+        NSLayoutConstraint.activate([
+            restartGame.widthAnchor.constraint(equalToConstant: 110),
+            restartGame.heightAnchor.constraint(equalToConstant: 40),
+            backGame.widthAnchor.constraint(equalToConstant: 110),
+            backGame.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
 }

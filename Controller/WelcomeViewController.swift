@@ -26,7 +26,7 @@ class WelcomeViewController: UIViewController {
         
         let button = UIButton()
         button.setTitle("Start game", for: .normal)
-        button.backgroundColor = .white
+        button.backgroundColor = UIColor(named: "YellowButton")
         button.setTitleColor(.black, for: .normal)
         button.setTitleColor(.systemYellow, for: .highlighted)
         button.layer.cornerRadius = 10
@@ -36,44 +36,36 @@ class WelcomeViewController: UIViewController {
         return button
     }()
     
+    private lazy var showGameSettings = {
+        
+        let button = UIButton()
+        button.setTitle("Settings game", for: .normal)
+        button.backgroundColor = UIColor(named: "YellowButton")
+        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.systemYellow, for: .highlighted)
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(AddSettingsController), for: .touchUpInside)
+        return button
+    }()
+    
     @objc private func AddBoardGameController() {
         let boardGameController = BoardGameController()
         navigationController?.pushViewController(boardGameController, animated: true)
     }
-//    override func loadView() {
-//        super.loadView()
-//        view.addSubview(getEndButtonView())
-//    }
-
-//    @objc func showNextScreen(_ sender: UIButton) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        
-//        let viewController = storyboard.instantiateViewController(withIdentifier: "BoardGameController")
-//        viewController.modalPresentationStyle = .fullScreen
-//        self.present(viewController, animated: true, completion: nil)
-//    }
     
-//    private func getEndButtonView() -> UIButton {
-//        let button = UIButton(frame: CGRect(x: 50, y: 50, width: 346, height: 56))
-//        button.setTitle("Go ", for: .normal)
-//        button.setTitleColor(.purple, for: .normal)
-//        button.setTitleColor(.yellow, for: .highlighted)
-//        button.layer.cornerRadius = 10
-//        
-//        let window = UIApplication.shared.windows[0]
-//        let topPadding = window.safeAreaInsets.top
-//        button.frame.origin.y = topPadding
-        
-//        button.addTarget(nil, action: #selector(showNextScreen(_:)), for: .touchUpInside)
-        
-//        return button
-//    }
+    @objc private func AddSettingsController() {
+        let settingsController = SettingsViewController()
+        navigationController?.pushViewController(settingsController, animated: false)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPink
+        print("viewDidLoad")
+        view.backgroundColor = UIColor(named: "View")
         setBunnerImage()
         configureAddStartButton()
+        configureGameSettingsButton()
     }
 
 }
@@ -87,6 +79,16 @@ private extension WelcomeViewController {
             showNextScreen.topAnchor.constraint(equalTo: view.topAnchor, constant: 722),
             showNextScreen.widthAnchor.constraint(equalToConstant: 346),
             showNextScreen.heightAnchor.constraint(equalToConstant: 56)
+        ])
+    }
+    
+    func configureGameSettingsButton() {
+        view.addSubview(showGameSettings)
+        NSLayoutConstraint.activate([
+            showGameSettings.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            showGameSettings.topAnchor.constraint(equalTo: view.topAnchor, constant: 654),
+            showGameSettings.widthAnchor.constraint(equalToConstant: 346),
+            showGameSettings.heightAnchor.constraint(equalToConstant: 56)
         ])
     }
 }

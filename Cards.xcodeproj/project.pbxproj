@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A515B2CA2BE3892A00B896E5 /* ViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A515B2C92BE3892A00B896E5 /* ViewBuilder.swift */; };
+		A515B2CC2BE750DC00B896E5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A515B2CB2BE750DC00B896E5 /* SettingsViewController.swift */; };
 		A5AB4FAC2B09DB8C00FA932A /* CardViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB4FAB2B09DB8C00FA932A /* CardViewFactory.swift */; };
 		A5C1EEF42ACE802900499793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1EEF32ACE802900499793 /* AppDelegate.swift */; };
 		A5C1EEF62ACE802900499793 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1EEF52ACE802900499793 /* SceneDelegate.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		A515B2C92BE3892A00B896E5 /* ViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilder.swift; sourceTree = "<group>"; };
+		A515B2CB2BE750DC00B896E5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A52547F82ADFA91400EA2502 /* View.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = View.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A58085962B6239A0008D8E5D /* ShapeLayer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ShapeLayer.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A590A2D32B6793C800DDA386 /* BoardGame.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = BoardGame.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -122,6 +124,7 @@
 			children = (
 				A5F0CD232B00A75F0081C38B /* BoardGameController.swift */,
 				A5F465062B78DF2F00889E36 /* WelcomeViewController.swift */,
+				A515B2CB2BE750DC00B896E5 /* SettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 			files = (
 				A5F0CD242B00A75F0081C38B /* BoardGameController.swift in Sources */,
 				A5F0CD272B00AA190081C38B /* Card.swift in Sources */,
+				A515B2CC2BE750DC00B896E5 /* SettingsViewController.swift in Sources */,
 				A5F0CD292B00AF470081C38B /* Game.swift in Sources */,
 				A5F465072B78DF2F00889E36 /* WelcomeViewController.swift in Sources */,
 				A5F0CD1C2AFFCB8E0081C38B /* Cards.swift in Sources */,
